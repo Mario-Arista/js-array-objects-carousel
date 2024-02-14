@@ -1,4 +1,4 @@
-// COpio Array con oggetti come da consegna
+// Copio Array con oggetti come da consegna
 
 const arrayimages = [
     {
@@ -20,28 +20,76 @@ const arrayimages = [
     }, {
         image: 'img/05.webp',
         title: "Marvel's Avengers",
-        text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
+        text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
     }
 ];
 
 // PARTE 1 --> da modificare considerando l'array
 
-const images = ["./img/01.webp", "./img/02.webp", "./img/03.webp", "./img/04.webp", "./img/05.webp"];
-console.log(images);
-
-
-// bersagliamo lo slider
+// bersaglio lo slider
 const sliderElement = document.getElementById("slider");
 
+//  Stampo in slider title, image and text
+for (let i = 0; i < arrayimages.length; i++) {
 
-// tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array
-for (let i = 0; i < images.length; i++) {
+    // Creo un div per ogni elemento dell'arrayimages
+    const slide = document.createElement("div");
+    slide.classList.add("slide");
 
-    sliderElement.innerHTML += `<img src="./img/0${i + 1}.webp" alt="immagine ${i + 1}">`;
+    // Creo nuovi elementi HTML per nome e posizioni
+    let titleElement = document.createElement("div");
+    let textElement = document.createElement("div");
+    let imageElement = document.createElement("img");
 
-    // per ognuno di essi andremo a creare un elemento img dentro lo slider
+    // Ciclo per iterare title, text and images dentro oggetti
+    for (let key in arrayimages[i]) {
+
+        let field = arrayimages[i][key];
+
+        // Aggiungo dentro titleElement
+        if (key === "title") {
+
+            titleElement.innerText = field;
+
+        // Aggiungo dentro textElement
+        } else if (key === "text") {
+
+            textElement.innerText = field;
+        
+        // Aggiungo immagine dentro imageElement
+        } else if (key === "image") {
+
+            // Cambio l'immagine prendendo l'URL dall'array
+            let imageUrl = arrayimages[i][key];
+            
+            imageElement.src = `./${imageUrl}`;
+            imageElement.alt = "Immagine slider";
+        }
+
+    }
+    
+    // Aggiungo l'immagine, il titolo e il testo al div slide
+    slide.append(imageElement);
+    slide.append(titleElement);
+    slide.append(textElement);
+
+    // Aggiungo il div slide al slider
+    sliderElement.appendChild(slide);
 
 }
+
+// const images = ["./img/01.webp", "./img/02.webp", "./img/03.webp", "./img/04.webp", "./img/05.webp"];
+// console.log(images);
+
+
+// // tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array
+// for (let i = 0; i < images.length; i++) {
+
+//     sliderElement.innerHTML += `<img src="./img/0${i + 1}.webp" alt="immagine ${i + 1}">`;
+
+//     // per ognuno di essi andremo a creare un elemento img dentro lo slider
+
+// }
 
 
 // PARTE 2
@@ -65,7 +113,7 @@ let slideNumber = 1;
 document.querySelector("#up-arrow").addEventListener("click", function() {
 
 
-    if (slideNumber < images.length) {
+    if (slideNumber < imageElement.length) {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");

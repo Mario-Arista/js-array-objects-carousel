@@ -29,14 +29,8 @@
     overflow: hidden;
 }
 
-#aside-images-little {
-    width: 20%;
-    height: 100%;
-    position: relative;
-
-    /* test */
-    background-color: white;
-    border: 1px solid red;
+.slide {
+    width: 100%;
 }
 
 #slider img {
@@ -49,6 +43,18 @@
 #slider img:not(.active) {
     display: none;
 }
+
+#aside-images-little {
+    width: 20%;
+    height: 100%;
+    position: relative;
+
+    /* test */
+    background-color: white;
+    border: 1px solid red;
+}
+
+
 
 #slider-plus-aside #arrows {
     display: flex;
