@@ -24,18 +24,7 @@ const arrayimages = [
     }
 ];
 
-
-// COPIA JS GABRIEL
-/*
-Adesso rimuoviamo tutto il markup statico e inseriamo tutte le immagini dinamicamente servendoci dell'array fornito e un semplice ciclo for che concatena un template literal. 
-Tutte le immagini saranno nascoste, tranne la prima, che avrà una classe specifica che la renderà visibile.
-Al termine di questa fase ci ritroveremo con lo stesso slider stilato nella milestone 1, ma costruito dinamicamente attraverso JavaScript.
-*/
-
-
-// bersagliamo lo slider
-// tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array
-// per ognuno di essi andremo a creare un elemento img dentro lo slider
+// PARTE 1 --> da modificare considerando l'array
 
 const images = ["./img/01.webp", "./img/02.webp", "./img/03.webp", "./img/04.webp", "./img/05.webp"];
 console.log(images);
@@ -54,7 +43,10 @@ for (let i = 0; i < images.length; i++) {
 
 }
 
-document.querySelector("#slider img:nth-of-type(1)").className = "active";
+
+// PARTE 2
+// Parte da modificare in seguito prima devo inserire elementi in pagina da array
+// Devo stare attento a nome elementi 
 
 /*
 -  salvo un contatore della slide
@@ -65,6 +57,7 @@ document.querySelector("#slider img:nth-of-type(1)").className = "active";
 */
 
 
+document.querySelector("#slider img:nth-of-type(1)").className = "active";
 // -  salvo un contatore della slide
 let slideNumber = 1;
 
