@@ -88,8 +88,8 @@ arrayimages.forEach((currentElement, index) => {
 
 let slideNumber = 1;
 
-// -  QUANDO premo la freccia SU
-document.querySelector("#up-arrow").addEventListener("click", function() {
+// -  QUANDO premo la freccia giu
+document.querySelector("#down-arrow").addEventListener("click", function() {
 
 
     if (slideNumber < arrayimages.length) {
@@ -121,8 +121,8 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         
 });
 
-
-document.querySelector("#down-arrow").addEventListener("click", function() {
+// -  QUANDO premo la freccia su
+document.querySelector("#up-arrow").addEventListener("click", function() {
 
     if (slideNumber > 1) {
         // - prendo l'immagine attuale e le aggiungo la classe "hidden"  
@@ -149,6 +149,29 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
 
     }
     
-
-
 });
+
+
+// bersaglio le antemprime al click
+const antemprimaElements = document.querySelectorAll(".anteprima");
+
+antemprimaElements.forEach(function(element, index) {
+    element.addEventListener("click", function() {
+
+        // Nascondo tutti gli slider
+        document.querySelectorAll(".slide").forEach(function(slide) {
+            slide.classList.add("hidden");
+        });
+
+        // Determino il numero di slide corrispondente all'anteprima su cui è stato fatto clic
+        const slideToShow = index + 1;
+
+        // Mostro lo slide corrispondente
+        document.querySelector(`.slide:nth-of-type(${slideToShow})`).classList.remove("hidden");
+
+        // Aggiorno la variabile slideNumber 
+        slideNumber = slideToShow;
+    });
+});
+
+
