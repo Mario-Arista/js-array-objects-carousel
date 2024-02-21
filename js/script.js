@@ -108,9 +108,6 @@ antemprimaElements.forEach(function(element, index) {
 // -  salvo un contatore della slide
 let slideNumber = 1;
 
-// -  set interval per nex slide
-const autoplay = setInterval(showNextSlide, 3000);
-
 // -  QUANDO premo la freccia giu - la slide successiva
 document.querySelector("#down-arrow").addEventListener("click", function() {
 
@@ -153,7 +150,68 @@ function showPrevSlide() {
 
 }
 
+// Comportamento bottoni Play, pause and reverse 
 
+// dichiaro elementi pulsanti
+const playButton = document.querySelector("#play-button");
+const pauseButton = document.querySelector("#pause-button");
+const reverseButton = document.querySelector("#reverse-button");
 
+// evento per play 
+playButton.addEventListener("click", function() {
 
+    // Avvio l'autoplay
+    startAutoplay();
 
+    // Nascondo e metto visibile pausa
+    playButton.style.display = "none";
+    reverseButton.style.display = "none";
+    pauseButton.style.display = "inline-block";
+
+});
+
+// evento per pausa
+pauseButton.addEventListener("click", function() {
+
+    // Interrompo l'autoplay
+    stopAutoplay();
+
+    // Nascondo pausa e metto visibile play e reverse
+    playButton.style.display = "inline-block";
+    reverseButton.style.display = "inline-block";
+    pauseButton.style.display = "none";
+});
+
+// evento per reverse
+reverseButton.addEventListener("click", function() {
+
+    // Interrompo l'autoplay
+    reverseAutoplay();
+
+    // Nascondo e metto visibile pausa
+    playButton.style.display = "none";
+    reverseButton.style.display = "none";
+    pauseButton.style.display = "inline-block";
+});
+
+// dichiaro autoplay
+let autoplay;
+
+// Funzione per avviare l'autoplay
+function startAutoplay() {
+    autoplay = setInterval(showNextSlide, 3000);
+}
+
+// Funzione per interrompere l'autoplay
+function stopAutoplay() {
+
+    clearInterval(autoplay);
+    
+}
+
+// Funzione per invertire il meccanismo di autoplay
+function reverseAutoplay() {
+    
+    autoplay = setInterval(showPrevSlide, 3000);
+
+}
