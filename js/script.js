@@ -24,15 +24,13 @@ const arrayimages = [
     }
 ];
 
-// Stampo Elementi HTML dentro Slider
-
 // bersaglio lo slider
 const sliderElement = document.getElementById("slider");
 
 // bersaglio il contenitore delle antemprime
 const asideElement = document.querySelector("#aside-anteprime");
 
-//  Stampo in slider title, image and text e anteprime
+//  Stampo slider e anteprime
 arrayimages.forEach((currentElement, index) => {
 
     // Creo un div per ogni elemento dell'arrayimages
@@ -55,7 +53,6 @@ arrayimages.forEach((currentElement, index) => {
     // Inserisco testo dentro div
     titleElement.innerText = `${currentElement.title}`;
     textElement.innerText = `${currentElement.text}`;
-
 
     // Aggiungo l'immagine, il titolo e il testo al div slide
     slideElement.append(imageElement);
@@ -82,79 +79,10 @@ arrayimages.forEach((currentElement, index) => {
 
 });
 
-// Comportamento carosello
-
-// -  salvo un contatore della slide
-
-let slideNumber = 1;
-
-// -  QUANDO premo la freccia giu
-document.querySelector("#down-arrow").addEventListener("click", function() {
-
-
-    if (slideNumber < arrayimages.length) {
-
-        // - prendo l'immagine attuale e le aggiungo la classe "hidden"  
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("hidden");
-
-        // - aumento il contatore di 1
-        slideNumber++;
-
-        // - prendo l'immagine con il nuovo contatore e le rimuovo la classe "hidden"  
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("hidden");
-
-        console.log(slideNumber);
-
-    } else {
-
-        // - prendo l'immagine attuale e le aggiungo la classe "hidden"   
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("hidden");
-
-        // resetto la variabile che mi conta l'immagine a cui sono arrivato
-        slideNumber = 1;
-
-        // - prendo l'immagine con il nuovo contatore e le rimuovo la classe "hidden"  
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("hidden");
-
-    }
-
-        
-});
-
-// -  QUANDO premo la freccia su
-document.querySelector("#up-arrow").addEventListener("click", function() {
-
-    if (slideNumber > 1) {
-        // - prendo l'immagine attuale e le aggiungo la classe "hidden"  
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("hidden");
-
-        // - diminuisco il contatore di 1
-        slideNumber--;
-
-        // - prendo l'immagine con il nuovo contatore e le rimuovo la classe "hidden"  
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("hidden");
-
-        console.log(slideNumber);
-
-    } else {
-
-        // - prendo l'immagine attuale e le aggiungo la classe "hidden" 
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("hidden");
-
-        // - metto il valore di slideNumebr = alla posizione dell'ultima immagine
-        slideNumber = arrayimages.length;
-
-        // - prendo l'immagine con il nuovo contatore e le rimuovo la classe "hidden" 
-        document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("hidden");
-
-    }
-    
-});
-
-
-// bersaglio le antemprime al click
+// bersaglio le antemprime
 const antemprimaElements = document.querySelectorAll(".anteprima");
 
+// Event listener per le anteprime
 antemprimaElements.forEach(function(element, index) {
     element.addEventListener("click", function() {
 
@@ -173,5 +101,59 @@ antemprimaElements.forEach(function(element, index) {
         slideNumber = slideToShow;
     });
 });
+
+
+// COMPORTAMNTO SLIDER CON FRECCE
+
+// -  salvo un contatore della slide
+let slideNumber = 1;
+
+// -  set interval per nex slide
+const autoplay = setInterval(showNextSlide, 3000);
+
+// -  QUANDO premo la freccia giu - la slide successiva
+document.querySelector("#down-arrow").addEventListener("click", function() {
+
+    showNextSlide()
+   
+});
+
+// -  QUANDO premo la freccia su - la slide precedente
+document.querySelector("#up-arrow").addEventListener("click", function() {
+
+    showPrevSlide()
+    
+});
+
+// Funzione per mostrare la slide successiva
+function showNextSlide() {
+
+    // - prendo l'immagine attuale e le aggiungo la classe "hidden"  
+    document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("hidden");
+
+    // - utilizzo operatore terniario
+    slideNumber = slideNumber < arrayimages.length ? slideNumber + 1 : 1;
+        
+    // - prendo l'immagine con il nuovo contatore e le rimuovo la classe "hidden"  
+    document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("hidden");
+
+}
+
+// Funzione per mostrare la slide precedente
+function showPrevSlide() {
+
+    // - prendo l'immagine attuale e le aggiungo la classe "hidden"  
+    document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.add("hidden");
+
+    // - utilizzo operatore terniario
+    slideNumber = slideNumber > 1 ? slideNumber - 1 : arrayimages.length;
+
+    // - prendo l'immagine con il nuovo contatore e le rimuovo la classe "hidden"  
+    document.querySelector(`.slide:nth-of-type(${slideNumber})`).classList.remove("hidden");
+
+}
+
+
+
 
 
